@@ -147,7 +147,7 @@ if (!window.clearImmediate) {
   // Based on http://jsfromhell.com/array/shuffle
   var shuffleArray = function shuffleArray(arr) {
     for (var j, x, i = arr.length; i;
-      j = Math.floor(Math.random() * i),
+      j = Math.floor(settings.random() * i),
       x = arr[--i], arr[i] = arr[j],
       arr[j] = x) {}
     return arr;
@@ -203,6 +203,7 @@ if (!window.clearImmediate) {
 
       shuffle: true,
       rotateRatio: 0.1,
+      random: Math.random,
 
       shape: 'circle',
       ellipticity: 0.65,
@@ -336,9 +337,9 @@ if (!window.clearImmediate) {
     var getTextColor;
     function random_hsl_color(min, max) {
       return 'hsl(' +
-        (Math.random() * 360).toFixed() + ',' +
-        (Math.random() * 30 + 70).toFixed() + '%,' +
-        (Math.random() * (max - min) + min).toFixed() + '%)';
+        (settings.random() * 360).toFixed() + ',' +
+        (settings.random() * 30 + 70).toFixed() + '%,' +
+        (settings.random() * (max - min) + min).toFixed() + '%)';
     }
     switch (settings.color) {
       case 'random-dark':
@@ -471,7 +472,7 @@ if (!window.clearImmediate) {
         return 0;
       }
 
-      if (Math.random() > settings.rotateRatio) {
+      if (settings.random() > settings.rotateRatio) {
         return 0;
       }
 
@@ -481,11 +482,11 @@ if (!window.clearImmediate) {
 
       if (rotationSteps > 0) {
         return minRotation + 
-          (1 / Math.floor((Math.random() * rotationSteps) + 1)) *
+          (1 / Math.floor((settings.random() * rotationSteps) + 1)) *
           rotationRange;
       }
       else {
-        return minRotation + Math.random() * rotationRange;
+        return minRotation + settings.random() * rotationRange;
       }
     };
 
